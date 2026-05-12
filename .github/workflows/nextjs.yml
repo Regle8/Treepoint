@@ -76,10 +76,11 @@ jobs:
         env:
           # next.config.mjs reads this and sets basePath + assetPrefix so all
           # asset URLs resolve under https://<user>.github.io/<repo>/.
-          # Derived from the repository name so it stays correct if the repo
-          # is renamed.
-          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
-        run: ${{ steps.detect-package-manager.outputs.runner }} next build
+          # Hardcoded — if the repo is renamed, update this single value.
+          NEXT_PUBLIC_BASE_PATH: /Treepoint
+        run: |
+          echo "Building with NEXT_PUBLIC_BASE_PATH=$NEXT_PUBLIC_BASE_PATH"
+          ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

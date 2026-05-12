@@ -14,6 +14,7 @@ import {
 } from './constants';
 import { generateRays, generateRings, rayEndpoints } from './rings';
 import { useLoadProgress } from './useLoadProgress';
+import { withBasePath } from '@/lib/path';
 
 type Phase = 'loading' | 'exiting' | 'gone';
 
@@ -329,7 +330,7 @@ export default function TreeRings({
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/logo/treepoint-lockup.svg"
+              src={withBasePath('/logo/treepoint-lockup.svg')}
               alt="Treepoint Consultants"
               className="treerings-lockup"
             />

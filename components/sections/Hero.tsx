@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import SplitReveal from '@/components/ui/SplitReveal';
 import { HERO } from '@/lib/copy';
+import { withBasePath } from '@/lib/path';
 
 export default function Hero() {
   return (
@@ -19,7 +20,7 @@ export default function Hero() {
           className="block leading-none"
         >
           <Image
-            src="/logo/treepoint-lockup-white.svg"
+            src={withBasePath('/logo/treepoint-lockup-white.svg')}
             alt="Treepoint Consultants"
             width={4096}
             height={1749}

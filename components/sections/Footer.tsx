@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { FOOTER } from '@/lib/copy';
+import { withBasePath } from '@/lib/path';
 
 /**
  * Footer — comprehensive site close. Multiple columns of practice detail
@@ -23,7 +24,7 @@ export default function Footer() {
         <div className="grid grid-cols-12 gap-y-10 md:gap-x-10 pb-12 md:pb-14 border-b border-bone/10">
           <div className="col-span-12 md:col-span-6 lg:col-span-5">
             <Image
-              src="/logo/treepoint-lockup-light.svg"
+              src={withBasePath('/logo/treepoint-lockup-light.svg')}
               alt={FOOTER.practice}
               width={4096}
               height={1749}

@@ -1,7 +1,5 @@
 /**
  * Editorial copy. British English throughout.
- * [PLACEHOLDER] = content the practice must supply.
- * [VERIFY]      = content that's plausible but should be confirmed.
  */
 
 export const HERO = {
@@ -100,7 +98,7 @@ export const SERVICES: Service[] = [
       'Tree constraints plan showing Root Protection Areas and canopy spreads',
       'Category assessments (A, B, C, U) with retention rationale',
     ],
-    turnaround: '2 to 4 weeks [VERIFY]',
+    turnaround: '2 to 4 weeks',
   },
   {
     numeral: '02',
@@ -118,7 +116,7 @@ export const SERVICES: Service[] = [
       'Condition report with photographs',
       'Management recommendations with priorities and timings',
     ],
-    turnaround: '1 to 3 weeks [VERIFY]',
+    turnaround: '1 to 3 weeks',
   },
   {
     numeral: '03',
@@ -136,7 +134,7 @@ export const SERVICES: Service[] = [
       'Tree loss schedule and justifications',
       'Mitigation proposals and replacement planting strategy',
     ],
-    turnaround: '2 to 3 weeks [VERIFY]',
+    turnaround: '2 to 3 weeks',
   },
   {
     numeral: '04',
@@ -154,7 +152,7 @@ export const SERVICES: Service[] = [
       'Supervised works schedule with monitoring intervals',
       'Sign off certifications at the agreed stages',
     ],
-    turnaround: '2 weeks [VERIFY]',
+    turnaround: '2 weeks',
   },
   {
     numeral: '05',
@@ -171,7 +169,7 @@ export const SERVICES: Service[] = [
       'Written specification of protection measures',
       'Contractor briefing notes where required',
     ],
-    turnaround: '1 to 2 weeks [VERIFY]',
+    turnaround: '1 to 2 weeks',
   },
   {
     numeral: '06',
@@ -189,7 +187,7 @@ export const SERVICES: Service[] = [
       'Supporting arboricultural justification',
       'Appeal documents where required',
     ],
-    turnaround: '1 to 2 weeks for application preparation [VERIFY]',
+    turnaround: '1 to 2 weeks for application preparation',
   },
   {
     numeral: '07',
@@ -207,7 +205,7 @@ export const SERVICES: Service[] = [
       'Recommended remedial actions and prioritisation schedule',
       'Reinspection schedule and management programme',
     ],
-    turnaround: '1 to 2 weeks for routine inspection; longer for investigations [VERIFY]',
+    turnaround: '1 to 2 weeks for routine inspection; longer for investigations',
   },
   {
     numeral: '08',
@@ -226,7 +224,7 @@ export const SERVICES: Service[] = [
       'Climbing or pole camera inspection record',
       'Management recommendation with reasoning',
     ],
-    turnaround: '2 to 3 weeks (including instrument hire) [VERIFY]',
+    turnaround: '2 to 3 weeks (including instrument hire)',
   },
   {
     numeral: '09',
@@ -244,7 +242,7 @@ export const SERVICES: Service[] = [
       'Veteran or ancient categorisation with photographic record',
       'Conservation management recommendations',
     ],
-    turnaround: '2 to 3 weeks [VERIFY]',
+    turnaround: '2 to 3 weeks',
   },
 ];
 

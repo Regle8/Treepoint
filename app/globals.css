@@ -1,0 +1,435 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --forest: #1a3a2e;
+  --forest-deep: #0f2620;
+  --bone: #f5f1e8;
+  --bone-warm: #ede5d1;
+  --bark: #3d2817;
+  --moss: #5a6b4a;
+  --amber: #c87533;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--forest-deep);
+  color: var(--bone);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+body {
+  position: relative;
+  background: var(--forest-deep);
+}
+
+::selection {
+  background: var(--amber);
+  color: var(--forest-deep);
+}
+
+.smallcaps {
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.numeral {
+  font-family: var(--font-display), Georgia, serif;
+  font-feature-settings: 'tnum' 1, 'lnum' 1;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.optical {
+  font-variation-settings: 'opsz' 144, 'SOFT' 50, 'WONK' 0;
+}
+
+.split-word { display: inline-block; will-change: transform, opacity; }
+
+/* =========================================================================
+   Sticky top nav — appears after the user scrolls past the hero, lets them
+   jump to any section. Backdrop blur keeps the labels readable against any
+   section background.
+   ========================================================================= */
+.sticky-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-100%);
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.sticky-nav.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.sticky-nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 14px 32px;
+  background: rgba(10, 22, 18, 0.72);
+  border-bottom: 1px solid rgba(245, 241, 232, 0.08);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+
+.sticky-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+.sticky-nav-link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(245, 241, 232, 0.58);
+  text-decoration: none;
+  padding: 6px 0;
+  border-bottom: 1px solid transparent;
+  transition:
+    color 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.sticky-nav-link:hover {
+  color: rgba(245, 241, 232, 0.95);
+}
+.sticky-nav-link.active {
+  color: var(--amber);
+  border-bottom-color: var(--amber);
+}
+.sticky-nav-link:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+.sticky-nav-numeral {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums lining-nums;
+  font-weight: 400;
+  letter-spacing: 0;
+  opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+  .sticky-nav-inner {
+    padding: 10px 14px;
+    gap: 1rem;
+  }
+  .sticky-nav-brand { font-size: 13px; }
+  .sticky-nav-list {
+    gap: 0.9rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .sticky-nav-list::-webkit-scrollbar { display: none; }
+  .sticky-nav-link {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    white-space: nowrap;
+  }
+  .sticky-nav-label {
+    display: none;
+  }
+  .sticky-nav-numeral {
+    font-size: 12px;
+    opacity: 0.9;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sticky-nav { transition: opacity 0.2s ease; transform: none; }
+  .sticky-nav.visible { transform: none; }
+}
+
+/* Disclosure icon — two thin lines forming a + that rotates to × on open */
+.disclosure-icon {
+  position: relative;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-top: 6px;
+  color: rgba(245, 241, 232, 0.55);
+  transition: color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.disclosure-icon::before,
+.disclosure-icon::after {
+  content: '';
+  position: absolute;
+  background: currentColor;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.disclosure-icon::before {
+  left: 0; right: 0; top: 50%;
+  height: 1px;
+  margin-top: -0.5px;
+}
+.disclosure-icon::after {
+  top: 0; bottom: 0; left: 50%;
+  width: 1px;
+  margin-left: -0.5px;
+  transform: scaleY(1);
+}
+.disclosure-icon.open {
+  color: var(--amber);
+}
+.disclosure-icon.open::after {
+  transform: scaleY(0);
+}
+.disclosure-summary:hover .disclosure-icon {
+  color: rgba(245, 241, 232, 0.9);
+}
+.disclosure-summary:hover .disclosure-icon.open {
+  color: var(--amber);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .disclosure-icon::before,
+  .disclosure-icon::after { transition: none; }
+}
+
+/* Three.js canvas — fixed behind every section, throughout scroll */
+.scene-canvas {
+  position: fixed !important;
+  inset: 0;
+  width: 100vw !important;
+  height: 100vh !important;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Each section sits above the scene */
+.section-content {
+  position: relative;
+  z-index: 10;
+}
+
+/* Global veil between the scene canvas and the section content.
+   Pushes the tree visually further back so the copy reads first.
+   Layered: a flat darkening wash + a vignette that anchors copy to the centre. */
+.scene-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 45%, rgba(10, 22, 18, 0.05) 0%, rgba(10, 22, 18, 0.55) 75%, rgba(10, 22, 18, 0.8) 100%),
+    linear-gradient(rgba(10, 22, 18, 0.35), rgba(10, 22, 18, 0.35));
+}
+
+:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+:focus:not(:focus-visible) { outline: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.tabular { font-variant-numeric: tabular-nums; }
+
+.link-quiet {
+  text-decoration: none;
+  border-bottom: 1px solid rgba(245, 241, 232, 0.35);
+  padding-bottom: 1px;
+  transition: border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1), color 0.4s;
+}
+.link-quiet:hover { border-color: var(--amber); color: var(--amber); }
+
+/* =========================================================================
+   TreeRings — opening loader. Fades out and unmounts after load completes.
+   ========================================================================= */
+.treerings-wrapper {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: #f5f1e8;
+  z-index: 100;
+  opacity: 1;
+  transition: opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.treerings-wrapper.exiting {
+  opacity: 0;
+}
+.treerings-wrapper.reduced-motion {
+  transition: opacity 0.4s ease;
+}
+.treerings-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.treerings-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  color: #0f2620;
+}
+/* Vertical stack at the bottom: lockup, tagline, then Enter CTA — anchored
+   as one composition so the button reads as part of the design, not pasted
+   over the rings. */
+.treerings-bottom-stack {
+  position: absolute;
+  left: 50%;
+  bottom: 11vh;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 34px;
+}
+.treerings-text {
+  text-align: center;
+  font-family: var(--font-display), Georgia, serif;
+}
+.treerings-wordmark {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: rgba(15, 38, 32, 0.92);
+}
+.treerings-lockup {
+  display: block;
+  height: 26px;
+  width: auto;
+  margin: 0 auto;
+}
+@media (min-width: 768px) {
+  .treerings-lockup { height: 30px; }
+}
+.treerings-tagline {
+  font-style: italic;
+  font-size: 14px;
+  margin-top: 0.55em;
+  color: rgba(15, 38, 32, 0.6);
+}
+.treerings-counter {
+  position: absolute;
+  top: 28px;
+  right: 30px;
+  font-family: var(--font-sans), sans-serif;
+  color: rgba(15, 38, 32, 0.55);
+}
+.treerings-counter .smallcaps {
+  font-size: 0.7rem;
+  letter-spacing: 0.24em;
+}
+/* Enter CTA — editorial typography, no box: a short rule, smallcaps label,
+   thin arrow. Deep forest reads with strong contrast against the bone bg.
+   Always in DOM (so the lockup above doesn't shift); revealed via .visible. */
+.treerings-enter {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  pointer-events: none;
+  background: transparent;
+  border: none;
+  padding: 6px 4px;
+  color: #0f2620;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.treerings-enter.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.treerings-enter:hover {
+  color: #1a3a2e;
+}
+.treerings-enter:focus-visible {
+  outline: 2px solid #c87533;
+  outline-offset: 6px;
+  border-radius: 2px;
+}
+.treerings-enter-rule {
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.55;
+  transition:
+    width 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.treerings-enter:hover .treerings-enter-rule {
+  width: 52px;
+  opacity: 0.9;
+}
+.treerings-enter-label { line-height: 1; }
+.treerings-enter-arrow {
+  font-size: 13px;
+  line-height: 1;
+  display: inline-block;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.treerings-enter:hover .treerings-enter-arrow {
+  transform: translateX(4px);
+}
+
+@media (max-width: 768px) {
+  .treerings-bottom-stack { bottom: 8vh; gap: 24px; }
+  .treerings-counter { top: 18px; right: 18px; }
+  .treerings-enter { font-size: 10px; gap: 11px; }
+  .treerings-enter-rule { width: 22px; }
+  .treerings-enter:hover .treerings-enter-rule { width: 40px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .treerings-enter { transition: opacity 0.3s ease; transform: none; }
+  .treerings-enter.visible { transform: none; }
+  .treerings-enter-rule,
+  .treerings-enter-arrow { transition: none; }
+  .treerings-wrapper { transition: none; }
+}
